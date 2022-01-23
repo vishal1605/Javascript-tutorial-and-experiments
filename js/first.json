@@ -1,0 +1,13 @@
+{
+    "name": "Vishal",
+    "score":11.75,
+    "isAdmin": true,
+    "value":null,
+    "cart": ["food", "smartPhone", "dairyProduct"],
+    "myobj":{
+        "name":"Sahil",
+        "marks":35.66,
+        "cart2": ["food", "smartPhone", "ThumbsUp"]
+
+    }
+}
