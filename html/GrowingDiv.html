@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growing Options Div</title>
+    <link rel="stylesheet" href="/css/all.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* #full-body {
+            background-color: red;
+        } */
+
+        .container {
+            width: 300px;
+            height: 200px;
+            margin: 50px auto;
+            box-shadow: 2px 2px 3px 2px rgb(230, 225, 225), -2px -2px 3px 2px rgb(219, 217, 217);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .container .profile {
+            width: 60px;
+            height: 60px;
+            display: block;
+            /* border: 1px solid red; */
+            margin-right: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+
+        }
+
+        .container .profile img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container .options {
+            position: relative;
+        }
+
+        .container .options>label {
+            cursor: pointer;
+        }
+
+        .container .options>label:hover {
+            color: blue;
+        }
+
+        .container .options .all-options {
+            position: absolute;
+            top: 23px;
+            left: 10px;
+            background-color: white;
+            width: 130px;
+            height: 130px;
+            box-shadow: 2px 2px 3px 2px rgb(230, 225, 225), -2px -2px 3px 2px rgb(219, 217, 217);
+            transform: scale(0, 0);
+            transition: transform 0.5s ease-in-out;
+            transform-origin: top left;
+            border-radius: 5px;
+            z-index: 10;
+
+        }
+        .body-blur{
+            opacity: 0.6;
+            background-color: rgb(197, 194, 194);
+            transition: all 0.5s ease-in-out;
+            
+        }
+
+        .container .options .all-options-show {
+            transform: scale(1, 1);
+            box-shadow: 2px 2px 3px 2px rgb(250, 250, 250), -2px -2px 3px 2px rgb(248, 247, 247);
+            background-color: rgb(228, 29, 29);
+        }
+    </style>
+</head>
+
+<body id="full-body" class="myBody">
+    <div class="container">
+        <div class="profile">
+            <img src="/images/avatar2.png" alt="">
+        </div>
+        <div class="options">
+            <label class="menu-icon"><i class="fas fa-ellipsis-v" id="icon-menu"></i></label>
+            <div class="all-options" id="options-all">
+                <a href="#"><i class="fab fa-facebook-square"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fas fa-plane"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter-square"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fas fa-music"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fas fa-envelope-open-text"></i></a>
+
+            </div>
+        </div>
+
+    </div>
+    <script>
+        const menuIcon = document.getElementById("icon-menu");
+        const options = document.getElementById("options-all");
+        const allBody = document.getElementById("full-body");
+
+
+        menuIcon.onclick = function () {
+            options.classList.toggle("all-options-show");
+            allBody.classList.toggle("body-blur")
+
+        };
+
+        document.addEventListener('click', (allBody)=>{
+            if(allBody.target.id !== 'icon-menu'){
+                options.classList.remove("all-options-show");
+                closeBody();
+            }
+            console.log(allBody.target.id);
+        });
+        // allBody.addEventListener('click', closeBody);
+        function closeBody(){
+            allBody.classList.remove("body-blur");
+        };
+
+
+
+        // const menuIcon = document.querySelector(".menu-icon");
+        // const options = document.querySelector(".all-options");
+
+        // document.addEventListener('click', (e)=>{
+        //     if(e.target.classList !== 'menu-icon'){
+        //         options.classList.remove("all-options-show");
+        //     }
+        // });
+
+        // menuIcon.addEventListener('click', ()=>{
+        //     options.classList.toggle("all-options-show");
+        // });
+
+        // allBody.onclick = function(e){
+        //     if(e.target.id !== 'icon-menu'){
+        //         options.classList.remove("all-options-show");
+        //         console.log(e.target.id)
+        //     }
+        // };
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Function</title>
+    <style>
+        .container{
+            margin: 10px auto;
+            width: 700px;
+            height: 400px;
+            border: 1px solid black;
+        }
+        .box{
+            width: 50px;
+            height: 50px;
+            border: 1px solid red;
+        }
+        .box1{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+
+        </div>
+    </div>
+
+
+    <script>
+
+        var parent = document.querySelector(".container");
+
+        parent.addEventListener('click', (e)=>{
+            parent.classList.toggle("box1")
+            console.log(parent);
+        })
+
+
+
+
+        // parent.addEventListener("click", (e)=>{
+        //     e.target.attribute.add("box1");
+        // });
+        // function capture(e){
+        //     e.target.style.backgroundColor="black";
+        //     // console.log(e);
+        // }
+
+
+
+        // document.querySelector(".container").addEventListener("mouseover", function(){
+        //     document.getElementsByClassName("box").style.bacground="yellow";
+
+        // });
+        // var outer=document.querySelector(".container");
+        // outer.addEventListener('mouseover', display);
+        // outer.addEventListener('mouseout', display1);
+
+        // function display(){
+        //     // document.querySelector(".box").setAttribute("style", "background:red");
+        //     document.querySelector(".box").classList.add("box1");
+
+        // }
+        // function display1(){
+        //     // document.querySelector(".box").setAttribute("style", "background: none; width:300px");
+        //     document.querySelector(".box").classList.remove("box1")
+
+        // }
+        
+        
+    </script>
+    
+</body>
+</html>

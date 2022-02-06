@@ -5,32 +5,68 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/all.css">
     <title>Document</title>
+    <style>
+        .glow {
+            color: yellow;
+            font-weight: 900;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <header>
-            <h1>
-                Vishalgptt
-            </h1>
-        </header>
-        <menu>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio ab assumenda culpa est vero quidem ex.
-                Repudiandae sed quo ex quia esse impedit perspiciatis, quis nobis? Doloribus, fugit! Libero aut nulla
-                ullam! Cumque explicabo voluptatum sapiente exercitationem nihil laudantium totam, dolorum libero quod
-                sequi quaerat id eveniet error officia provident.
-            </p>
-        </menu>
-        <footer>
-            <a href="#">Vishalgptt@gmail.com</a>
-        </footer>
+        <h2>Please choose a seat to book</h2>
+  <form action="/action_page.php" method="post">
+    <input type="checkbox" name="vehicle" id="A1" value="$100">$100<br>
+    <input type="checkbox" name="vehicle" id="A2" value="$65"> $65<br>
+    <input type="checkbox" name="vehicle" id="A3" value="$55"> $55<br>
+    <input type="checkbox" name="vehicle" id="A4" value="$50"> $50<br>
+    <p>Selected Seat(s)</p>
+
+    <!-- container for displaying selected seats -->
+    <ul id="selected-seats"></ul>
+    
+    <div>
+      Total: $<span id="seats-total">0</span> USD 
+      <input type="submit" value="Reserve Now">
+    </div>  
+  </form>
     </div>
 
     <script>
+        var selections = {};
+        var checkboxElems = document.querySelectorAll("input[type='checkbox']");
+        var totalElem = document.getElementById("seats-total");
+        for (var i = 0; i < checkboxElems.length; i++) {
+            checkboxElems[i].addEventListener("click", displayCheck);
+            console.log(1);
+        }
+        function displayCheck(e) {
+            if (e.target.checked) {
+                selections[e.target.id] = {
+                    name: e.target.name,
+                    value: e.target.value
+                };
+            }
+            else {
+                delete selections[e.target.id];
+            }
 
+            var result = [];
+            var total = 0;
+
+            for (var key in selections) {
+                var listItem = "<li>" + selections[key].name + " " +
+                    selections[key].value + "</li>";
+                result.push(listItem);
+                total += parseInt(selections[key].value.substring(1));
+            }
+
+            totalElem.innerText = total;
+            seatsElem.innerHTML = result.join("");
+        }
 
     </script>
 </body>

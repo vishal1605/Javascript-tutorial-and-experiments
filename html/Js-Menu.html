@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 400px;
+            height: 300px;
+            border: 1px solid black;
+            margin: 10px auto;
+
+        }
+        .menu{
+            width: 150px;
+        }
+        .menu>li{
+            list-style: none;
+            display: block;
+            position: relative;
+            padding-bottom: 25px;
+            border: 1px solid red;
+
+        }
+        .menu>li>a{
+            text-decoration: none;
+            display: block;
+            color: blue;
+        }
+        
+        li .drop-down{
+            background-color: skyblue;
+            width: 100px;
+            position: absolute;
+            z-index: 1;
+            top: 15px;
+            left: 50px;
+            transform: scale(0,0);
+            transform-origin: top left;
+            transition: transform 0.5s ease-in-out;
+            
+        }
+        li .drop-down ul{
+            padding-left: 0;
+            
+        }
+        li .drop-down ul li{
+            display: block;
+            list-style: none;
+            text-align: center;
+        }
+        
+        li .drop-down ul li a{
+            text-decoration: none;
+            display: block;
+            color: black;
+        }
+        li .drop-down-menu{
+            transform: scale(1,1);
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#" class="link">Category</a>
+            <div class="drop-down drop-down-menu">
+                <ul>
+                    <li><a href="#">Comadey</a></li>
+                    <li><a href="#">Horror</a></li>
+                    <li><a href="#">Adventure</a></li>
+                    <li><a href="#">Thriller</a></li>
+                </ul>
+            </div>
+            
+            </li>
+            <li><a href="#">Setting</a></li>
+            <li><a href="#">About us</a></li>
+        </ul>
+    </div>
+
+    <script>
+                document.body.addEventListener("click", function(){
+                    document.querySelector(".drop-down").classList.remove("drop-down-menu");
+                },{capture: false});
+        
+               
+        
+
+    </script>
+    
+</body>
+</html>
