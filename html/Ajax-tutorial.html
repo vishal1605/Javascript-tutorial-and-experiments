@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax-tutorial</title>
+    <style>
+        .container {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+
+        .container table {
+            width: 90%;
+            table-layout: fixed;
+            /*auto*/
+            margin: 10px;
+            word-wrap: break-word;
+        }
+
+        table,
+        tr,
+        td,
+        th {
+            border: 1px solid red;
+            border-collapse: collapse;
+        }
+
+        table tr,
+        td,
+        th {
+            padding: 7px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="box">
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Date</th>
+                    <th>Mobile number</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+
+
+    </div>
+    <button id="btn-click">Fetch Details</button>
+
+    <script>
+        const btn = document.getElementById("btn-click");
+
+        const box = document.getElementById("box");
+        function showDetails(){
+            console.log("its working");
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:8080/', true);
+
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    let dataImp = JSON.parse(this.responseText);
+                    row = "";
+
+                    for (var i = 0; i < dataImp.length; i++) {
+                        const table = document.getElementById("table-body");
+
+                        row += "<tr><td>"+dataImp[i].id+"</td><td>"+dataImp[i].name+"</td>"
+                        +"<td>"+dataImp[i].city+"</td><td>"+dataImp[i].date+"</td><td>"+dataImp[i].mobileNumber+"</td>"
+                        +"<td>"+dataImp[i].role+"</td></tr>";
+                        console.log(row);
+
+                        table.innerHTML = row;
+
+                       
+                   }
+                }
+            }
+            xhr.send();
+        }
+
+        showDetails();
+
+    </script>
+
+</body>
+
+</html>
