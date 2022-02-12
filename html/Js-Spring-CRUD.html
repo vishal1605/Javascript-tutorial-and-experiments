@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring-Js Crud</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/Js-Spring-CRUD.css">
+</head>
+
+<body>
+    <header class="bg-primary">
+        <h1 class="text-white">CRUD</h1>
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Create note
+        </button>
+    </header>
+    <main class="pt-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Notes</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="myForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Topic name</label>
+                                            <input type="text" class="form-control" id="form-name"
+                                                aria-describedby="emailHelp" name="topicName">
+                                        </div>
+                                        <div>
+                                            <label class="form-label">write notes</label>
+                                            <textarea class="form-control" placeholder="Leave a comment here"
+                                                style="height: 100px" name="note" id="form-note"></textarea>
+
+                                        </div>
+                                        <br>
+
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <button class="btn btn-success" id="load-data">refresh</button>
+            <div class="row" id="put-row">
+                
+
+            </div>
+        </div>
+    </main>
+
+
+    <script src="/js/bootstrap.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        const refresh = document.getElementById("load-data");
+        refresh.onclick = function(){
+            showAllCards();
+
+        };
+
+
+
+        const form = document.getElementById("myForm");
+        form.onsubmit = function () {
+            event.preventDefault();
+            // var data = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            var name = document.getElementById('form-name').value;
+            var notes = document.getElementById('form-note').value;
+            xhr.open('POST', 'http://localhost:8080/add', true);
+            xhr.setRequestHeader('Content-type', 'application/json');
+            var param = {
+                topicName: name,
+                note: notes
+            }
+
+            var params = JSON.stringify(param);
+
+            console.log(params)
+            xhr.send(params);
+        };
+
+
+
+
+        // Show all Data========================================
+        const cardRow = document.getElementById("put-row");
+        function showAllCards() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:8080/show', true);
+            xhr.onload = function () {
+                if (this.status == 200) {
+                    let allData = JSON.parse(this.responseText);
+                    var row = "";
+                    for (var i = 0; i < allData.length; i++) {
+                        row += '<div class="col-12 col-md-6 col-lg-3 mb-3"><div class="card">'
+                            + '<div class="card-body">'
+                            + '<h5 class="card-title" style="border-bottom: 1px solid gray">' + allData[i].topicName + '</h5>'
+                            + '<p class="card-text" id="words" style="height: 120px; overflow: hidden;">'
+                            + allData[i].note
+                            + '</p>'
+                            + '<button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp;&nbsp;'
+                            + '<button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>'
+
+                            + '</div>'
+
+                            + '</div></div>'
+                        cardRow.innerHTML = row;
+
+
+                    }
+                }
+            }
+            console.log("card")
+            xhr.send();
+        }
+        // setInterval(showAllCards, 2000);
+        showAllCards();
+
+
+
+
+
+
+
+
+        // $(document).ready(function () {
+
+        //     $("#myForm").on('submit', function (event) {
+        //         event.preventDefault();
+        //         var value = {
+        //             topicName: $("#form-name").val(),
+        //             note: $("#form-note").val()
+
+        //         }
+        //         // var value = $(this).serialize();
+        //         // console.log(value);
+        //         var jsonValue = JSON.stringify(value);
+        //         console.log(jsonValue);
+
+        //         $.ajax({
+        //             url: "http://localhost:8080/add",
+        //             data: jsonValue,
+        //             headers: {
+        //                 "Content-type": "application/json"
+        //             },
+        //             type: 'POST',
+        //             success: function (data, textStatus, jqXHR) {
+        //                 console.log(data);
+
+        //             },
+        //             error: function (data, textStatus, jqXHR) {
+
+        //             }
+        //         })
+        //     })
+
+        // }); Its working with spring boot @RequestBody
+
+
+
+
+
+
+        // Minimize Text area===================================
+        const para = document.querySelectorAll("#words")
+        for (var i = 0; i < para.length; i++) {
+            var strings = para[i].innerText;
+            // console.log(strings);
+            var result = add3Dots(strings, 170);
+            para[i].innerText = result;
+
+        }
+        function add3Dots(string, limit) {
+            var dots = "...";
+            if (string.length > limit) {
+                // you can also use substr instead of substring
+                string = string.substring(0, limit) + dots;
+            }
+
+            return string;
+        }
+
+        // minimizeText();
+    </script>
+
+</body>
+
+</html>

@@ -63,23 +63,33 @@
         const btn = document.getElementById("btn-click");
 
         const box = document.getElementById("box");
+        const table = document.getElementById("table-body");
         function showDetails(){
             console.log("its working");
+            // Step 1:- Get object of xhr and XMLHttpRequest
             var xhr = new XMLHttpRequest();
+
+            // Use Open() method to set Properties in Ajax xhr like url, Get/Post, True/False
             xhr.open('GET', 'http://localhost:8080/', true);
 
+            // Then Call onload Function and you get you data From specfic url or file
             xhr.onload = function () {
+
+                // Before Fetching Please Check Url Status
+
                 if (this.status == 200) {
+
+                    // You get your data in the form of String in==> this.responseText
+                    // Then pls convert it to Json format Using JSON.parse() method
+
                     let dataImp = JSON.parse(this.responseText);
-                    row = "";
+                    var row = "";
 
                     for (var i = 0; i < dataImp.length; i++) {
-                        const table = document.getElementById("table-body");
-
                         row += "<tr><td>"+dataImp[i].id+"</td><td>"+dataImp[i].name+"</td>"
                         +"<td>"+dataImp[i].city+"</td><td>"+dataImp[i].date+"</td><td>"+dataImp[i].mobileNumber+"</td>"
                         +"<td>"+dataImp[i].role+"</td></tr>";
-                        console.log(row);
+                        // console.log(row);
 
                         table.innerHTML = row;
 
