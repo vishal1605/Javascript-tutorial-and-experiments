@@ -47,7 +47,7 @@
                                         </div>
                                         <br>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary" id="submit-form">Submit</button>
                                     </form>
                                 </div>
 
@@ -61,7 +61,7 @@
         <div class="container">
             <button class="btn btn-success" id="load-data">refresh</button>
             <div class="row" id="put-row">
-                
+
 
             </div>
         </div>
@@ -73,22 +73,23 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script>
         const refresh = document.getElementById("load-data");
-        refresh.onclick = function(){
+        refresh.onclick = function () {
             showAllCards();
 
         };
 
-
-
-        const form = document.getElementById("myForm");
-        form.onsubmit = function () {
-            event.preventDefault();
-            // var data = new FormData(form);
+        document.getElementById("myForm").addEventListener('submit', (e)=>{
+            e.preventDefault();
             var xhr = new XMLHttpRequest();
             var name = document.getElementById('form-name').value;
             var notes = document.getElementById('form-note').value;
             xhr.open('POST', 'http://localhost:8080/add', true);
             xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.onload = function(){
+                if(this.status == 200){
+                    showAllCards();
+                }
+            }
             var param = {
                 topicName: name,
                 note: notes
@@ -96,9 +97,17 @@
 
             var params = JSON.stringify(param);
 
-            console.log(params)
             xhr.send(params);
-        };
+           
+            clearField();
+        });
+
+        function clearField() {
+            var name = document.getElementById('form-name').value = '';
+            var notes = document.getElementById('form-note').value = '';
+
+        }
+
 
 
 
@@ -131,9 +140,8 @@
                     }
                 }
             }
-            console.log("card")
             xhr.send();
-        }
+        };
         // setInterval(showAllCards, 2000);
         showAllCards();
 
@@ -167,6 +175,8 @@
         //             type: 'POST',
         //             success: function (data, textStatus, jqXHR) {
         //                 console.log(data);
+        //                 clearField();
+        //                 showAllCards();
 
         //             },
         //             error: function (data, textStatus, jqXHR) {
@@ -187,7 +197,7 @@
         for (var i = 0; i < para.length; i++) {
             var strings = para[i].innerText;
             // console.log(strings);
-            var result = add3Dots(strings, 170);
+            var result = add3Dots(strings, 17);
             para[i].innerText = result;
 
         }
