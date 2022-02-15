@@ -14,7 +14,8 @@
 <body>
     <header class="bg-primary">
         <h1 class="text-white">CRUD</h1>
-        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            id="open-model" onclick="clearField()">
             Create note
         </button>
     </header>
@@ -33,7 +34,7 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form id="myForm">
+                                    <form id="myForm" class="insert">
                                         <div class="mb-3">
                                             <label class="form-label">Topic name</label>
                                             <input type="text" class="form-control" id="form-name"
@@ -43,6 +44,39 @@
                                             <label class="form-label">write notes</label>
                                             <textarea class="form-control" placeholder="Leave a comment here"
                                                 style="height: 100px" name="note" id="form-note"></textarea>
+
+                                        </div>
+                                        <br>
+
+                                        <button type="submit" class="btn btn-primary" id="submit-form">Submit</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Update</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="myForm" class="update">
+                                        <input type="text" class="form-control" id="form-ids" hidden="hidden"
+                                                name="nId">
+                                        <div class="mb-3">
+                                            <label class="form-label">Topic name</label>
+                                            <input type="text" class="form-control" id="form-names"
+                                                aria-describedby="emailHelp" name="topicName">
+                                        </div>
+                                        <div>
+                                            <label class="form-label">write notes</label>
+                                            <textarea class="form-control" placeholder="Leave a comment here"
+                                                style="height: 100px" name="note" id="form-notes"></textarea>
 
                                         </div>
                                         <br>
@@ -69,149 +103,12 @@
 
 
     <script src="/js/bootstrap.bundle.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="/js/Js-Spring-CRUD.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
     <script>
-        const refresh = document.getElementById("load-data");
-        refresh.onclick = function () {
-            showAllCards();
 
-        };
-
-        document.getElementById("myForm").addEventListener('submit', (e)=>{
-            e.preventDefault();
-            var xhr = new XMLHttpRequest();
-            var name = document.getElementById('form-name').value;
-            var notes = document.getElementById('form-note').value;
-            xhr.open('POST', 'http://localhost:8080/add', true);
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.onload = function(){
-                if(this.status == 200){
-                    showAllCards();
-                }
-            }
-            var param = {
-                topicName: name,
-                note: notes
-            }
-
-            var params = JSON.stringify(param);
-
-            xhr.send(params);
-           
-            clearField();
-        });
-
-        function clearField() {
-            var name = document.getElementById('form-name').value = '';
-            var notes = document.getElementById('form-note').value = '';
-
-        }
-
-
-
-
-
-        // Show all Data========================================
-        const cardRow = document.getElementById("put-row");
-        function showAllCards() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://localhost:8080/show', true);
-            xhr.onload = function () {
-                if (this.status == 200) {
-                    let allData = JSON.parse(this.responseText);
-                    var row = "";
-                    for (var i = 0; i < allData.length; i++) {
-                        row += '<div class="col-12 col-md-6 col-lg-3 mb-3"><div class="card">'
-                            + '<div class="card-body">'
-                            + '<h5 class="card-title" style="border-bottom: 1px solid gray">' + allData[i].topicName + '</h5>'
-                            + '<p class="card-text" id="words" style="height: 120px; overflow: hidden;">'
-                            + allData[i].note
-                            + '</p>'
-                            + '<button class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>&nbsp;&nbsp;'
-                            + '<button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>'
-
-                            + '</div>'
-
-                            + '</div></div>'
-                        cardRow.innerHTML = row;
-
-
-                    }
-                }
-            }
-            xhr.send();
-        };
-        // setInterval(showAllCards, 2000);
-        showAllCards();
-
-
-
-
-
-
-
-
-        // $(document).ready(function () {
-
-        //     $("#myForm").on('submit', function (event) {
-        //         event.preventDefault();
-        //         var value = {
-        //             topicName: $("#form-name").val(),
-        //             note: $("#form-note").val()
-
-        //         }
-        //         // var value = $(this).serialize();
-        //         // console.log(value);
-        //         var jsonValue = JSON.stringify(value);
-        //         console.log(jsonValue);
-
-        //         $.ajax({
-        //             url: "http://localhost:8080/add",
-        //             data: jsonValue,
-        //             headers: {
-        //                 "Content-type": "application/json"
-        //             },
-        //             type: 'POST',
-        //             success: function (data, textStatus, jqXHR) {
-        //                 console.log(data);
-        //                 clearField();
-        //                 showAllCards();
-
-        //             },
-        //             error: function (data, textStatus, jqXHR) {
-
-        //             }
-        //         })
-        //     })
-
-        // }); Its working with spring boot @RequestBody
-
-
-
-
-
-
-        // Minimize Text area===================================
-        const para = document.querySelectorAll("#words")
-        for (var i = 0; i < para.length; i++) {
-            var strings = para[i].innerText;
-            // console.log(strings);
-            var result = add3Dots(strings, 17);
-            para[i].innerText = result;
-
-        }
-        function add3Dots(string, limit) {
-            var dots = "...";
-            if (string.length > limit) {
-                // you can also use substr instead of substring
-                string = string.substring(0, limit) + dots;
-            }
-
-            return string;
-        }
-
-        // minimizeText();
+       
     </script>
 
 </body>

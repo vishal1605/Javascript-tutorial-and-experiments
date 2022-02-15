@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus-Seat</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/all.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 border border-1 border-warning m-auto">
+                <form id="myForm" class="m-5 mt-2">
+                    <label>Name</label>
+                    <input type="text" name="myName" id="" class="form-control"><br />
+
+                    <label for="first">Seat1</label>
+                    <input type="checkbox" name="seat" id="first" value="10">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="two">Seat2</label>
+                    <input type="checkbox" name="seat" id="two" value="20">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="three">Seat3</label>
+                    <input type="checkbox" name="seat" id="three" value="30">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="four">Seat4</label>
+                    <input type="checkbox" name="seat" id="four" value="40">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="five">Seat5</label>
+                    <input type="checkbox" name="seat" id="five" value="50">&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <label for="six">Seat6</label>
+                    <input type="checkbox" name="seat" id="six" value="60">
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const checkBox = document.querySelectorAll('input[type="checkbox"]');
+        var i;
+        var total = 0;
+        var select={};
+        for (i = 0; i < checkBox.length; i++) {
+            checkBox[i].addEventListener('click', (e)=>{
+                if(e.target.checked == true){
+                    var values=e.target.value;
+                    total=total+values;
+                    console.log(total);
+                }else if(e.target.checked == false){
+                    total-=e.target.value;
+
+                }
+               
+            });
+
+        }
+        
+
+        
+    </script>
+
+</body>
+
+</html>
