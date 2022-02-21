@@ -8,6 +8,11 @@
     <title>Bus-Seat</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/all.css">
+    <style>
+        *{
+            word-break: break-all;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,30 +44,59 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+            <div class="col-9 border border-1 border-warning" id="seats"></div>
+            <div class="col-3 border border-1 border-success" id="price"></div>
+        </div>
 
     </div>
 
-    <script>
-        const checkBox = document.querySelectorAll('input[type="checkbox"]');
-        var i;
-        var total = 0;
-        var select={};
-        for (i = 0; i < checkBox.length; i++) {
-            checkBox[i].addEventListener('click', (e)=>{
-                if(e.target.checked == true){
-                    var values=e.target.value;
-                    total=total+values;
-                    console.log(total);
-                }else if(e.target.checked == false){
-                    total-=e.target.value;
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-                }
-               
-            });
+    <script>
+        var total = 0;
+        var seat=[];
+        const checkBox = document.querySelectorAll('input[type="checkbox"]');
+        const mySeats = document.getElementById('seats');
+        const myPrice = document.getElementById('price');
+        for(var i=0;i<checkBox.length;i++){
+            checkBox[i].addEventListener('click', displayValue);
 
         }
-        
+        function displayValue(e){
+            var myValue = 525.22;
+            
+           
+            if(e.target.checked == true){
+                seat.push(e.target.id);
+                
+                total+=myValue;
+                 
+            }else{
+                var index = seat.indexOf(e.target.id);
+                seat.splice(index, 1);
+                total-=myValue;
+                
+            }
+            // seat.join("");
+            mySeats.innerHTML = seat;
+            myPrice.innerHTML = total;
+            
+        }
+        // $(document).ready(function(){
+        //     $('input[type="checkbox"]').click(function(e){
+        //         if($(this).is(":checked")){
+        //             // console.log($(this).val());
+        //             total+=parseInt($(this).val())
 
+        //         }else{
+        //             total-=parseInt($(this).val());
+        //         }
+        //         console.log(total);
+
+        //     })
+        // });
         
     </script>
 
