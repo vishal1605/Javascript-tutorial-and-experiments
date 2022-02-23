@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart value</title>
+</head>
+<body>
+    <button id="dec">-</button>
+    <span id="value">0</span>
+    <button id="inc">+</button>
+
+
+    <script>
+        const decrement = document.getElementById('dec');
+        const increment = document.getElementById('inc');
+        const value = document.getElementById('value');
+
+        var i = 0;
+        i=localStorage.getItem("myValue");
+
+        decrement.onclick = function ghato(){
+            if(i == 0){
+                console.log("not decrising");
+            }else if(i>0){
+                i = i-1;
+            }
+            localStorage.setItem("myValue", i);
+            // console.log(i);
+            getValue();
+            
+        }
+        increment.onclick = function badho(){
+            i++;
+            localStorage.setItem("myValue", i);
+            // console.log(i);
+            getValue();
+        }
+
+        function getValue(){
+            var i = localStorage.getItem("myValue");
+            value.innerText = i;
+        }
+        getValue();
+        
+
+
+    </script>
+    
+</body>
+</html>
