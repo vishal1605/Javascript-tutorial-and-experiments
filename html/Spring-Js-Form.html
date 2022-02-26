@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    body{
+      background: linear-gradient(to right, rgb(161, 211, 231), rgb(238, 119, 143));
+    }
+    .container .row .col-4{
+      background-color: aliceblue;
+    }
+    .container .row .col-4 form .link{
+      cursor: pointer;
+    }
+    .container .row .col-4 form .link:hover{
+      color: red !important;
+    }
+    .hidden{
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row register-row mt-3" id="card-row">
+      <div class="col-4 m-auto border border-1">
+        <h3 class="text-center">Register</h3>
+        <form id="register-form" class="submit-form pt-2 pb-2">
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+            name="name">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            name="email">
+          </div>
+          
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1"
+            name="password">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputAge" class="form-label">Age</label>
+            <input type="text" class="form-control" id="exampleInputAge" aria-describedby="emailHelp"
+            name="age">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="exampleInputCity" aria-describedby="emailHelp"
+            name="city">
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+          <div class="mb-2 mt-2 text-center" id="change-form">
+            <h5>already user &nbsp;<span class="link border-3 border-bottom border-primary text-primary" id="btn-link">login</span></h5>
+           </div>
+        </form>
+
+      </div>
+    </div>
+
+    <div class="row login-row mt-3 hidden" id="card-row">
+      <div class="col-4 m-auto border border-1">
+        <h3 class="text-center">Login</h3>
+        <form id="login-form" class="submit-form pt-2 pb-2">
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
+            name="name">
+          </div>
+          
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1"
+            name="password">
+          </div>
+
+          <button type="submit" class="btn btn-primary">login</button>
+
+          <div class="mb-2 mt-2 text-center" id="change-form">
+            <h5>new user &nbsp;<span class="link border-3 border-bottom border-primary text-primary" id="btn-link">register here</span></h5>
+           </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/Spring-Js-Form.js"></script>
+
+</body>
+
+</html>
