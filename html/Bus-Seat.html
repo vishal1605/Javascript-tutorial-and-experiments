@@ -57,33 +57,43 @@
     <script>
         var total = 0;
         var seat=[];
-        const checkBox = document.querySelectorAll('input[type="checkbox"]');
-        const mySeats = document.getElementById('seats');
-        const myPrice = document.getElementById('price');
-        for(var i=0;i<checkBox.length;i++){
-            checkBox[i].addEventListener('click', displayValue);
+        // const checkBox = document.querySelectorAll('input[type="checkbox"]');
 
-        }
-        function displayValue(e){
-            var myValue = 525.22;
+        $(document).ready(function() {
+            // alert("working");
+
+           $("#myForm input").click(function() {
+            console.log( $("#myForm input").index(this) );
+
+});
+
+});
+        // const mySeats = document.getElementById('seats');
+        // const myPrice = document.getElementById('price');
+        // for(var i=0;i<checkBox.length;i++){
+        //     checkBox[i].addEventListener('click', displayValue);
+
+        // }
+        // function displayValue(e){
+        //     var myValue = 525.22;
             
            
-            if(e.target.checked == true){
-                seat.push(e.target.id);
+        //     if(e.target.checked == true){
+        //         seat.push(e.target.id);
                 
-                total+=myValue;
+        //         total+=myValue;
                  
-            }else{
-                var index = seat.indexOf(e.target.id);
-                seat.splice(index, 1);
-                total-=myValue;
+        //     }else{
+        //         var index = seat.indexOf(e.target.id);
+        //         seat.splice(index, 1);
+        //         total-=myValue;
                 
-            }
-            // seat.join("");
-            mySeats.innerHTML = seat;
-            myPrice.innerHTML = total;
+        //     }
+        //     // seat.join("");
+        //     mySeats.innerHTML = seat;
+        //     myPrice.innerHTML = total;
             
-        }
+        // }
         // $(document).ready(function(){
         //     $('input[type="checkbox"]').click(function(e){
         //         if($(this).is(":checked")){
