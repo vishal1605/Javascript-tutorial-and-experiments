@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/all.css">
   <style>
     *{
       padding: 0;
@@ -39,7 +40,12 @@
     }
     .btn-disable{
       pointer-events: none;
-      background-color: rgb(223, 117, 117);
+      background-color: rgb(192, 109, 109);
+
+    }
+    .edit-btn-disable{
+      pointer-events: none;
+      background-color: rgb(115, 186, 233);
 
     }
     .container .data-table .col .data-send-btn{
@@ -71,6 +77,7 @@
               <th scope="col">City</th>
               <th scope="col">age</th>
               <th scope="col">Status</th>
+              <th scope="col">Edit</th>
               <th scope="col">Delete</th>
             </tr>
           </thead>
@@ -87,8 +94,13 @@
         <div class="alert alert-success p-0 text-center" id="msg">
           
         </div>
-        <h3 class="text-center">Register</h3>
+        <h3 class="text-center contain">Register</h3>
         <form id="register-form" class="submit-form pt-2 pb-2">
+          <div class="mb-3">
+
+            <input type="text" hidden class="form-control" aria-describedby="emailHelp"
+            name="uId">
+          </div>
           <div class="mb-3">
             <label for="exampleInputName" class="form-label">Username</label>
             <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp"
@@ -129,7 +141,7 @@
     </div>
 
     <div class="row login-row mt-3 hidden" id="card-row">
-      <div class="col-4 m-auto border border-1">
+      <div class="col-sm-7 col-md-6 col-lg-6 m-auto border border-1">
         <h3 class="text-center">Login</h3>
         <form id="login-form" class="submit-form pt-2 pb-2">
           <div class="mb-3">
@@ -155,7 +167,7 @@
     </div>
   </div>
 
-  <script src="/js/Spring-Js-Form.js"></script>
+  <script src="/js/Spring-Js-Form.js" defer></script>
 
 </body>
 
