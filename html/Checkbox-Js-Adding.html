@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 500px;
+            height: auto;
+            margin: 10px auto;
+            border: 1px solid red;
+        }
+
+        .value-container {
+            width: 500px;
+            height: auto;
+            margin: 10px auto;
+            border: 1px solid red;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        .value-container .array-value,
+        .main-array {
+            border: 1px solid red;
+        }
+
+        .array-index {
+            width: 500px;
+            height: auto;
+            margin: 10px auto;
+            border: 1px solid rgb(219, 183, 23);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <input type="checkbox" name="count" id="A1" value="10">
+        <input type="checkbox" name="count1" id="A2" value="30">
+        <input type="checkbox" name="count2" id="A3" value="25">
+        <input type="checkbox" name="count3" id="A4" value="15">
+        <input type="checkbox" name="count4" id="A5" value="35">
+        <input type="checkbox" name="count5" id="A6" value="20">
+        <input type="checkbox" name="count6" id="A7" value="17">
+        <input type="checkbox" name="count7" id="A8" value="27">
+    </div>
+    <div class="value-container">
+        <div class="array-value">
+        </div>
+        <div class="main-array">
+        </div>
+    </div>
+    <div class="array-index">
+
+    </div>
+
+    <script>
+        var arr = [];
+        var arr1 = [];
+        var index = [];
+        var inputs = document.querySelectorAll('.container input[type="checkbox"]').forEach(tar => {
+            tar.addEventListener('click', (e) => {
+                if (e.target.checked == true) {
+                    var val = arr.indexOf(e.target.id);
+                    if (val === -1) {
+                        arr.push(e.target.id);
+                        arr1.push(e.target.value);
+                        index.push(arr.indexOf(e.target.id));
+                        document.querySelector('.main-array').innerText = arr;
+                        document.querySelector('.array-index').innerText = index;
+                        document.querySelector('.array-value').innerText = arr1;
+
+                    } else {
+                        console.log("Value is already present");
+                    }
+
+
+                } else {
+                    var val = arr.indexOf(e.target.id);
+                    var val2 = arr1.indexOf(e.target.value);
+                    arr.splice(val, 1)
+                    arr1.splice(val2, 1)
+                    document.querySelector('.main-array').innerText = arr;
+                    document.querySelector('.array-value').innerText = arr1;
+
+                }
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>
