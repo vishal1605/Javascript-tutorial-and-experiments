@@ -110,6 +110,35 @@ array1.push(3);
 // ==================================================================================
 // lastIndexOf
 //It is also used for searching the object/value is exist in array but its always start from last index
-var obj = ["Sahil", "Riwan", "Amit","Anjali", "Sumit"];
-var val = obj.lastIndexOf("Amit",1); //Always start from last index
-console.log(val);
+// var obj = ["Sahil", "Riwan", "Amit","Anjali", "Sumit"];
+// var val = obj.lastIndexOf("Amit",1); //Always start from last index
+// console.log(val);
+
+// ==================================================================================
+// Find Array ==>It is provide you only one value that match the conditon
+// var obj = [10, 12, 19, 17, 25];
+// var value = obj.find((age)=>{
+//     return (age>=15) && (age<=20);
+
+// });
+// console.log(value);
+
+
+// ==================================================================================
+// FindIndex Array ==>It is provide you only one index of that value that match the condtion
+// var obj = [10, 12, 19, 17, 25];
+// var value = obj.findIndex((age)=>{
+//     return (age>=15) && (age<=20);
+
+// });
+// console.log(value);
+
+
+// ==================================================================================
+// Filter Array 
+var obj = [10, 12, 19, 17, 25];
+var value = obj.filter((age)=>{
+    return (age>=15) && (age<=20);
+
+});
+console.log(value);
