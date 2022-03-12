@@ -52,15 +52,27 @@ var a = [
             car1: "Tata",
             car2: "Mahindra",
             car3: "Toyota"
+        },
+        fullName : function(){
+            console.log("Ravi");;
         }
     }
 ];
 
-
-var val = a.filter(person=>{
-    return person.cars.car1 =='Tata';
+var law =a.filter(myName=> {
+    return myName['fullName']();
 });
-console.log(val);
+console.log(law);
+
+
+// var val = a.filter(person=>{
+//     return person.favMovies.some(law);
+// });
+
+// function law(el){
+//     return el=="spider-man";
+// }
+// console.log(val);
 
 
 
