@@ -59,10 +59,10 @@ var a = [
     }
 ];
 
-var law =a.filter(myName=> {
-    return myName['fullName']();
-});
-console.log(law);
+// var law =a.filter(myName=> {
+//     return myName['fullName']();
+// });
+// console.log(law);
 
 
 // var val = a.filter(person=>{
@@ -76,19 +76,11 @@ console.log(law);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// ===========================For-In-Loop=========================================
+// for (var key in a) {
+//     console.log(a[key]);
+    
+// }
 
 // const fil = 'x-man';
 // // var values = a.filter((movieName) => {
@@ -103,3 +95,12 @@ console.log(law);
 
 // });
 // console.log(values);
+
+
+// ==============================Map-Method========================================
+//Map :-- Map method is used for fetch single properties from Array of Objects
+var myName = a.map((fName) => {
+    return fName.favMovies == "hulk"
+})
+
+console.log(myName);

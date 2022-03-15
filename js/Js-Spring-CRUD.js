@@ -24,6 +24,7 @@ function showAllCards() {
 
 
             }
+            minimizeText();
         }
     }
     xhr.send();
@@ -143,17 +144,19 @@ document.querySelector(".update").addEventListener('submit', (e) => {
 
 // Minimize Text area===================================
  function minimizeText(){
-    const para = document.querySelectorAll("#words")
+    const para = document.querySelectorAll("#words");
+    console.log(para);
     for (var i = 0; i < para.length; i++) {
         var strings = para[i].innerText;
         // console.log(strings);
-        var result = add3Dots(strings, 13);
+        var result = add3Dots(strings, 180);
         para[i].innerText = result;
     
     }
 
  }
  function add3Dots(string, limit) {
+     
     var dots = "...";
     if (string.length > limit) {
         // you can also use substr instead of substring

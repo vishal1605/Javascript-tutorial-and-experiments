@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .grand-parent{
+            width: 400px;
+            /* height: 600px; */
+            border: 1px solid black;
+            margin: 20px auto;
+            background-color: skyblue;
+        }
+        .grand-parent .parent{
+            width: 350px;
+            height: 250px;
+            border: 1px solid red;
+            display: flex;
+            margin: 25px;
+            justify-content: space-around;
+            align-items: center;
+            background-color: rgb(235, 110, 110);
+        }
+        .grand-parent .parent .child{
+            width: 130px;
+            height: 200px;
+            border: 1px solid blue;
+            background-color: rgb(219, 221, 69);
+        }
+    </style>
+</head>
+<body>
+    <div class="grand-parent" id="dada">
+        <div class="parent" id="papa">
+            <div class="child" id="child-1">Child-1</div>
+            <div class="child" id="child-2">Child-2</div>
+        </div>
+        <div class="parent" id="papa-2">
+            <div class="child" id="child-3">Child-3</div>
+            <div class="child" id="child-4">Child-4</div>
+        </div>
+    </div>
+
+
+
+    <script src="/js/Dom-Manipulation.js"></script>
+    
+</body>
+</html>
