@@ -99,8 +99,20 @@ var a = [
 
 // ==============================Map-Method========================================
 //Map :-- Map method is used for fetch single properties from Array of Objects
-var myName = a.map((fName) => {
-    return fName.favMovies == "hulk"
-})
+// var myName = a.map((fName) => {
+//     return fName.favMovies == "hulk"
+// })
 
-console.log(myName);
+// console.log(myName);
+
+// =================================Create object using 2nd type================================
+
+var info = new Object();
+info.firstName = "Vishal";
+info.lastName = "Gupta";
+info.cars = function() {
+    console.log(this.lastName);
+    
+}
+
+console.log(info.cars());
