@@ -27,7 +27,6 @@ function showRegisterForm(e) {
 // =======================================Register/Save-User-Start================================================
 
 document.getElementById("register-form").addEventListener('submit', registerForm);
-var allData = [];
 function registerForm(e) {
     const contain = document.querySelector('.contain');
     if (contain.innerText == 'Register') {
@@ -35,31 +34,10 @@ function registerForm(e) {
         const id = Math.floor(Math.random() * 100) + 1;
         console.log(id);
         var args = JSON.parse(localStorage.getItem('data'));
-        if (args != null) {
-            var val = args.some(data => {
-                return data.id == id;
-            });
-            if (val) {
-                console.log("user is already present");
-
-            } else {
-                console.log("Register"); const data = new FormData(e.target);
-                const name = data.get('name');
-                const email = data.get('email');
-                const password = data.get('password');
-                const age = data.get('age');
-                const city = data.get('city');
-
-                var param = { id, name, email, password, age, city }
-                console.log(param);
-                allData.push(param);
-                localStorage.setItem('data', JSON.stringify(allData));
-                showAllData();
-
-            }
-        }
-        else {
-            console.log("Register"); const data = new FormData(e.target);
+        if (args == null) {
+            var saveData = [];
+            console.log("Register");
+            const data = new FormData(e.target);
             const name = data.get('name');
             const email = data.get('email');
             const password = data.get('password');
@@ -70,10 +48,46 @@ function registerForm(e) {
 
             var param = { id, name, email, password, age, city }
             console.log(param);
-            allData.push(param);
-            localStorage.setItem('data', JSON.stringify(allData));
+            saveData.push(param);
+            localStorage.setItem('data', JSON.stringify(saveData));
+            showSuccessMsg();
+            removeMsg();
+
+        } else {
+            var val = args.some(user => {
+                return user.id == id;
+            })
+            console.log(val);
+
+            if (val) {
+                console.log("user already exist");
+                showErrorMsg();
+                removeMsg();
+
+
+            } else {
+                const data = new FormData(e.target);
+                const name = data.get('name');
+                const email = data.get('email');
+                const password = data.get('password');
+                const age = data.get('age');
+                const city = data.get('city');
+
+
+
+                var param = { id, name, email, password, age, city }
+                console.log(param);
+                args.push(param);
+                localStorage.setItem('data', JSON.stringify(args));
+                showSuccessMsg();
+                removeMsg();
+
+            }
+
+
 
         }
+
 
 
     } else {
@@ -112,6 +126,7 @@ function registerForm(e) {
     }
 
     clearFieldRegister();
+    showAllData();
 
 }
 
@@ -125,20 +140,80 @@ function clearFieldRegister() {
 }
 
 
-(function showAllData() {
+function showAllData() {
     const tableBody = document.getElementById('table-body');
-    console.log(tableBody);
+    const table = document.getElementById('show-register-form');
     var row = "";
     var args = JSON.parse(localStorage.getItem('data'));
-    for (var i = 0; i < args.length; i++) {
+    if (args == null) {
 
-        row += '<tr><th scope="row">' + args[i].id + '</th><td>' + args[i].name + '</td><td>' + args[i].email + '</td>'
-            + '<td>' + args[i].password + '</td><td>' + args[i].city + '</td><td>' + args[i].age + '</td>'
-            + '<td><button class="btn btn-primary" value="' + args[i].id + '" id="update-user-btn"><i class="fa-solid fa-pen-to-square"></i></button></td>'
-            + '<td><button class="btn btn-danger" value="' + args[i].id + '" id="enable-disable"><i class="fa-solid fa-trash"></i></button></td>'
+    } else {
+        // table.style.display = 'block';
+        for (var i = 0; i < args.length; i++) {
 
-        tableBody.innerHTML = row;
+            row += '<tr><th scope="row">' + args[i].id + '</th><td>' + args[i].name + '</td><td>' + args[i].email + '</td>'
+                + '<td>' + args[i].password + '</td><td>' + args[i].city + '</td><td>' + args[i].age + '</td>'
+                + '<td><button class="btn btn-primary" value="' + args[i].id + '" id="update-user-btn"><i class="fa-solid fa-pen-to-square"></i></button></td>'
+                + '<td><button class="btn btn-danger" value="' + args[i].id + '" id="enable-disable"><i class="fa-solid fa-trash"></i></button></td>'
+
+            tableBody.innerHTML = row;
+
+        }
 
     }
 
-}())
+}
+
+showAllData();
+
+
+const deleteBtn = document.querySelectorAll('#enable-disable');
+deleteBtn.forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+        
+        let myId = e.currentTarget.value;
+        console.log(myId);
+        let dataUser = JSON.parse(localStorage.getItem('data'));
+        let index = dataUser.findIndex(x => x.id == myId);
+        console.log(index);
+        dataUser.splice(index, 1);
+        localStorage.setItem('data', JSON.stringify(dataUser));
+        showAllData();
+
+    })
+})
+
+function showErrorMsg() {
+    let div = document.createElement('div')
+    div.id = 'error-msg'
+    div.className = 'alert alert-danger p-0 text-center';
+    div.innerText = 'User already exist';
+    console.log(div);
+    var form = document.getElementById('form-div');
+    form.insertBefore(div, form.childNodes[0]);
+
+}
+function showSuccessMsg() {
+    let div = document.createElement('div')
+    div.id = 'success-msg'
+    div.className = 'alert alert-success p-0 text-center';
+    div.innerText = 'User inserted successfully';
+    console.log(div);
+    var form = document.getElementById('form-div');
+    form.insertBefore(div, form.childNodes[0]);
+
+}
+
+function removeMsg() {
+    setTimeout(() => {
+        let error = document.getElementById('error-msg');
+        let success = document.getElementById('success-msg');
+        if (error==null) {
+            success.remove();
+            
+        } else {
+            error.remove();
+            
+        }
+    }, 4000)
+}
