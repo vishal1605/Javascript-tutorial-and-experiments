@@ -1,10 +1,10 @@
-var arr = [4,9,10]
-var array1 = new Array();
-array1.push(2);
-array1.push(1);
-array1.push(8);
-array1.push(5);
-array1.push(3);
+// var arr = [4,9,10]
+// var array1 = new Array();
+// array1.push(2);
+// array1.push(1);
+// array1.push(8);
+// array1.push(5);
+// array1.push(3);
 // array1.push(8);
 // array1.forEach(value => {
 //     // console.log(value);
@@ -136,9 +136,9 @@ array1.push(3);
 
 // ==================================================================================
 // Filter Array 
-var obj = [10, 12, 19, 17, 25];
-var value = obj.filter((age)=>{
-    return (age>=15) && (age<=20);
+// var obj = [10, 12, 19, 17, 25];
+// var value = obj.filter((age)=>{
+//     return (age>=15) && (age<=20);
 
-});
-console.log(value);
+// });
+// console.log(value);

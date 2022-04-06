@@ -33,7 +33,7 @@ function registerForm(e) {
         e.preventDefault();
         const id = Math.floor(Math.random() * 100) + 1;
         console.log(id);
-        var args = JSON.parse(localStorage.getItem('data'));
+        let args = JSON.parse(localStorage.getItem('data'));
         if (args == null) {
             var saveData = [];
             console.log("Register");
@@ -93,7 +93,6 @@ function registerForm(e) {
     } else {
         e.preventDefault();
         console.log("Updating");
-        var xhr = new XMLHttpRequest();
         const data = new FormData(e.target);
 
         const uId = data.get('uId');
@@ -102,25 +101,21 @@ function registerForm(e) {
         const password = data.get('password');
         const age = data.get('age');
         const city = data.get('city');
-        xhr.open('PUT', 'http://localhost:8080/update', true);
-        xhr.setRequestHeader('Content-type', 'application/json');
-        xhr.onload = function () {
-            if (this.status == 200) {
-                document.getElementById("msg").innerHTML = "<p class='mb-0'>" + this.responseText + "</p>";
-            }
+        let args = JSON.parse(localStorage.getItem('data'));
+        let num = args.findIndex(x => x.id == parseInt(uId));
 
-            const table = document.querySelector('.data-table').classList.remove('hidden');
-            const registration = document.querySelector('.register-row').classList.add('hidden');
-            document.querySelector('#button-register-form').classList.remove('edit-btn-disable');
+        args[num].name = name;
+        args[num].email = email;
+        args[num].password = password;
+        args[num].age = parseInt(age);
+        args[num].city = city;
 
-        }
 
-        var param = { uId, name, email, password, age, city }
-        console.log(param);
-        var params = JSON.stringify(param);
-        console.log(params);
-
-        xhr.send(params);
+        localStorage.setItem('data', JSON.stringify(args));
+        const table = document.querySelector('.data-table').classList.remove('hidden');
+        const registration = document.querySelector('.register-row').classList.add('hidden');
+        const btn = document.querySelector('#button-register-form');
+        btn.classList.remove('edit-btn-disable');
 
 
     }
@@ -144,8 +139,11 @@ function showAllData() {
     const tableBody = document.getElementById('table-body');
     const table = document.getElementById('show-register-form');
     var row = "";
-    var args = JSON.parse(localStorage.getItem('data'));
-    if (args == null) {
+    let args = JSON.parse(localStorage.getItem('data'));
+    if ((args == null) || (args.length == 0)) {
+        console.log(args + 'Woking');
+        row = '<tr>No data</tr>';
+        tableBody.innerHTML = row;
 
     } else {
         // table.style.display = 'block';
@@ -158,30 +156,100 @@ function showAllData() {
 
             tableBody.innerHTML = row;
 
+
         }
+        startDeleteOperation();
+        updateBtnProcess();
+
 
     }
+
 
 }
 
 showAllData();
 
 
-const deleteBtn = document.querySelectorAll('#enable-disable');
-deleteBtn.forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-        
-        let myId = e.currentTarget.value;
-        console.log(myId);
-        let dataUser = JSON.parse(localStorage.getItem('data'));
-        let index = dataUser.findIndex(x => x.id == myId);
-        console.log(index);
-        dataUser.splice(index, 1);
-        localStorage.setItem('data', JSON.stringify(dataUser));
-        showAllData();
+function startDeleteOperation() {
+    const deleteBtn = document.querySelectorAll('#enable-disable');
+    for (let k = 0; k < deleteBtn.length; k++) {
+        deleteBtn[k].addEventListener('click', deleteOperation);
 
+    }
+
+}
+
+function deleteOperation(e) {
+    let myId = e.currentTarget.value;
+    let dataUser = JSON.parse(localStorage.getItem('data'));
+    let indValue = dataUser.findIndex(x => x.id == myId);
+    dataUser.splice(indValue, 1);
+    localStorage.setItem('data', JSON.stringify(dataUser));
+    showAllData();
+
+}
+
+// ====================Update Process=========================================
+function updateBtnProcess() {
+    const targetUpdateBtn = document.querySelectorAll('#update-user-btn');
+    for (var i = 0; i < targetUpdateBtn.length; i++) {
+        targetUpdateBtn[i].addEventListener('click', getUpdateId);
+    }
+
+}
+function getUpdateId(e) {
+    const btn = document.querySelector('#button-register-form');
+    let myId = e.currentTarget.value;
+    console.log(myId);
+    let args = JSON.parse(localStorage.getItem('data'));
+    let user = args.filter(obj => {
+        return obj.id == myId;
     })
-})
+
+    btn.classList.add('edit-btn-disable');
+    const registration1 = document.querySelector('.register-row');
+    const table1 = document.querySelector('.data-table');
+    table1.classList.add('hidden');
+    registration1.classList.remove('hidden');
+    let parent = registration1.childNodes[1];
+    let heading = parent.childNodes[1];
+    heading.innerText = 'Update';
+    let formParent = parent.childNodes[3];
+    let formChild = formParent.childNodes[13];
+    formChild.innerText = 'update';
+    var id = document.querySelector('input[name="uId"]').value = user[0].id;
+    var name = document.querySelector('input[name="name"]').value = user[0].name;
+    var email = document.querySelector('input[name="email"]').value = user[0].email;
+    var password = document.querySelector('input[name="password"]').value = user[0].password;
+    var age = document.querySelector('input[name="age"]').value = user[0].age;
+    var city = document.querySelector('input[name="city"]').value = user[0].city;
+
+}
+
+// ===================================Cancel btn process================================
+const cancelBtn = document.getElementById('insert-cancel');
+cancelBtn.addEventListener('click', cancelBtnProcess);
+
+function cancelBtnProcess() {
+    console.log('Cancel me');
+
+    clearFieldRegister();
+    const btn = document.querySelector('#button-register-form');
+    const registration1 = document.querySelector('.register-row');
+    const table1 = document.querySelector('.data-table');
+    btn.classList.remove('edit-btn-disable');
+    let parent = registration1.childNodes[1];
+    let heading = parent.childNodes[1];
+    heading.innerText = 'Register';
+    let formParent = parent.childNodes[3];
+    let formChild = formParent.childNodes[13];
+    formChild.innerText = 'Submit';
+    table1.classList.remove('hidden');
+    registration1.classList.add('hidden');
+
+}
+
+
 
 function showErrorMsg() {
     let div = document.createElement('div')
@@ -208,12 +276,12 @@ function removeMsg() {
     setTimeout(() => {
         let error = document.getElementById('error-msg');
         let success = document.getElementById('success-msg');
-        if (error==null) {
+        if (error == null) {
             success.remove();
-            
+
         } else {
             error.remove();
-            
+
         }
     }, 4000)
 }

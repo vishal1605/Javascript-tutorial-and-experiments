@@ -53,8 +53,8 @@ var a = [
             car2: "Mahindra",
             car3: "Toyota"
         },
-        fullName : function(){
-            console.log("Ravi");;
+        fullName:function(){
+            return this.fname;
         }
     }
 ];
@@ -107,12 +107,20 @@ var a = [
 
 // =================================Create object using 2nd type================================
 
-var info = new Object();
-info.firstName = "Vishal";
-info.lastName = "Gupta";
-info.cars = function() {
-    console.log(this.lastName);
+// var info = new Object();
+// info.firstName = "Vishal";
+// info.lastName = "Gupta";
+// info.cars = function() {
+//     console.log(this.lastName);
     
-}
+// }
 
-console.log(info.cars());
+// console.log(info.cars());
+
+// let b = JSON.stringify(a);
+// console.log(b);
+
+ let h = a.filter(per=>{
+    return per.fullName;
+})
+console.log(h);
