@@ -18,7 +18,7 @@ var s = "Vishal gupta";
 // console.log(s.repeat(3)); //it repeat a word 3 times
 
 // console.log(s.slice(3,5)); //Slice return karta hai word one point se 2nd point tak but wo 2nd index ke pahle ka word return karta hai
-// console.log(s.substring(3,6)); // Same as above Slice function
+// console.log(s.substring(3,6)); // Same as above Slice function return 3 4 5
 
 
 

@@ -1,3 +1,5 @@
+// var array2 = new Array(6,7,9,8,5);
+// array2.forEach(val=> console.log(val));
 // var arr = [4,9,10]
 // var array1 = new Array();
 // array1.push(2);
