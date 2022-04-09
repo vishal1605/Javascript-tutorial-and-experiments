@@ -39,3 +39,11 @@
 
 
 // Note:- This Hoisting rule also apply on Local & Global Variables
+
+
+function a(){
+    console.log(b);
+}
+
+var b = 10;
+a();

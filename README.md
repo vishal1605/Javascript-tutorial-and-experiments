@@ -8,4 +8,8 @@ Topic I covered
 5) Object Prototype
 6) Set & Map
 7) String manuplation
-1) Hoisting
+8) Type conversion
+9) Date & Time
+10) Random number generator
+8) Type conversion
+8) Type conversion
