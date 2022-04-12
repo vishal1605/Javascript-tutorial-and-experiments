@@ -124,3 +124,19 @@ var a = [
     return per.fullName;
 })
 console.log(h);
+
+//=============Some important note for objects
+
+let a = {
+    name:'Vishal'
+};
+// let b = undefined;
+// console.log(a == b);
+// for (const key in a) {
+//     if (Object.hasOwnProperty.call(a, key)) {
+//         console.log(a[key]+" :"+key);
+        
+//     }
+// }
+
+// console.log(Object.keys(a));  //Check object has any property without knowing it
