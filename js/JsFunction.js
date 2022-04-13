@@ -70,3 +70,14 @@ const myObj = new myFunction("John", "Doe");
 
 // This will return "John"
 console.log(myObj.firstName);
+
+
+// Some example of function
+var sum = function xyz(a, b) {
+    let c = a + b;
+    console.log(c);
+    console.log(xyz);
+    
+}
+
+sum(5,3);
