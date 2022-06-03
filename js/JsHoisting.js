@@ -33,7 +33,7 @@
 // // But in o/p it will give you initialization error because Js interpreter 
 // // will not assign "undefined" to let & const
 // console.log(a);
-
+              //Temporal dead zone
 // const a = 3;
 // let b = 5;
 
@@ -41,11 +41,11 @@
 // Note:- This Hoisting rule also apply on Local & Global Variables
 
 
-// function a(){
-//     console.log(b);
-// }
+function a(){
+    console.log(b);
+}
 
-// var b = 10;
-// a();
+var b = 10;
+a();
 
 

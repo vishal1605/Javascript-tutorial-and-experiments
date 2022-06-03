@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-5 m-auto">
+                <form id="login-form" class="submit-form pt-2 pb-2">
+                    <input type="file" name="image" id="image-section">
+
+                    <button type="submit" class="btn btn-primary">submit</button>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const input = document.querySelector('#image-section');
+            const n = input.files[0].name;
+            const size = input.files[0].size;
+            console.log(n,size);
+            fetch('http://localhost:8080/save', {
+                method: 'POST',
+                body: JSON.stringify({
+                    imageName:n,
+                    imageSize:size
+                }),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+
+            }).then((res) => {
+                if (res.ok) {
+                    console.log("success" + " " + res);
+
+                    return res.text();
+
+
+                } else {
+                    throw Error("Not working" + " " + res.url);
+                }
+
+            }).then((data) => {
+                // data.forEach(element => {
+                //     console.log(element);
+                // });
+                console.log(data);
+            })
+                .catch((err) => console.log("Error is here", err));
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -1,3 +1,9 @@
+//Higher Order function:-- A function which is takes another function as an argument or return a function from it as a
+//result. It doesn't have to do both. It is known as Higher Order function
+
+
+
+
 // function x(params) {
 //     console.log("x");
 //     params();

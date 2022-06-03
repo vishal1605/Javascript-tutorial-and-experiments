@@ -13,13 +13,19 @@ const person2 = {
     
 }
 
+// let fullName = function (...language1) {
+    
+//     console.log(`My name is ${this.firstName} ${this.lastName}. And i am learning ${language1}.`);
+    
+// }
 // let fullName = function (language1) {
+    
 //     console.log(`My name is ${this.firstName} ${this.lastName}. And i am learning ${language1}.`);
     
 // }
 
-person.fullName.call(person, "Java");
-fullName.call(person2, "Java");
+// person.fullName.call(person, "Java");
+// fullName.call(person2, "JavaScript");
 
 // =============================Apply method=====================================
 
@@ -35,8 +41,8 @@ fullName.call(person2, "Java");
 
 //Bind() method is same as call()& Apply() method, Just difference is that you have to assign a new variable
 
-// let info = fullName.bind(person, ["python", "javaScript"]);
-// info();
+let info = fullName.bind(person, ["python", "javaScript"]);
+info();
 
 // let info2 = fullName.bind(person2, "Java");
 // info2();

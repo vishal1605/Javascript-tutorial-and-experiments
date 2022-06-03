@@ -144,3 +144,39 @@
 
 // });
 // console.log(value);
+
+let person = [
+    {
+        title:"bag",
+        price:15
+
+    },
+    {
+        title:"laptop",
+        price:170
+
+    },
+    {
+        title:"tv",
+        price:110
+
+    },
+    {
+        title:"cloths",
+        price:40
+
+    },
+    {
+        title:"shoes",
+        price:71
+
+    },
+    {
+        title:"phone",
+        price:150
+
+    }
+]
+
+let total = person.map((obj)=>obj.price).reduce((a, b)=>a+b,0)
+console.log(total);

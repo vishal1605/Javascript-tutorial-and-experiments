@@ -7,12 +7,12 @@
 
 
 // ===============Function are objects========================
-// function myFunction(a, b) {
+// function myFunction(a, b,c,d) {
 //     return arguments.length;
 // }
 
-// var val = myFunction(4, 7);
-// console.log(val);
+// var val = myFunction(4, 7.10,5); //It return you a length of argument 
+// console.log(val); //o/p=4
 
 // ==============
 // function myFunction(x, y) {
@@ -21,6 +21,8 @@
 //         console.log(y);
 //     }
 // }
+
+// myFunction(10);
 
 
 // ==========Find max value in function Arguments=============
@@ -34,8 +36,8 @@
 //     }
 //     return max;
 // }
-
-// var maxValue = findMax(4, 1, 3, 2, 8, 5, 12);
+// const arr = [4, 1, 3, 2, 8, 5, 12]
+// var maxValue = findMax(...arr);
 // console.log(maxValue);
 
 //===============Sum of arguments===============
@@ -53,23 +55,23 @@
 
 //===========Function invocation===============
 
-function myFunction(a, b) {
-    return a * b;
-}
-myFunction(10, 2);
+// function myFunction(a, b) {
+//     return a * b;
+// }
+// myFunction(10, 2);
 
 // ===========Function constructor===========
 // This is a function constructor:
-function myFunction(arg1, arg2) {
-    this.firstName = arg1;
-    this.lastName = arg2;
-}
+// function myFunction(arg1, arg2) {
+//     this.firstName = arg1;
+//     this.lastName = arg2;
+// }
 
 // This creates a new object
-const myObj = new myFunction("John", "Doe");
+// const myObj = new myFunction("John", "Doe");
 
 // This will return "John"
-console.log(myObj.firstName);
+// console.log(myObj.firstName);
 
 
 // Some example of function
